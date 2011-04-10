@@ -55,7 +55,7 @@ void bool(g, b)
     JSON::YAJL g
     SV* b
 CODE:
-    yajl_gen_bool(g, svTRUE(b));
+    yajl_gen_bool(g, SvTRUE(b));
 
 void map_open(g)
     JSON::YAJL g
