@@ -8,7 +8,7 @@ use Test::More;
 my $yajl_default = JSON::YAJL->new();
 isa_ok( $yajl_default, 'JSON::YAJL' );
 is( create($yajl_default),
-    '{"integer":123,"double":1.2299999999999999822,"number":3.141,"string":"a string","string2":"another string","map":{"key":"value","array":[1,2,3]}}'
+    '{"integer":123,"double":1.2299999999999999822,"number":3.141,"string":"a string","string2":"another string","null":null,"map":{"key":"value","array":[1,2,3]}}'
 );
 
 my $yajl_pretty = JSON::YAJL->new( 1, '   ' );
@@ -19,6 +19,7 @@ is( create($yajl_pretty), '{
    "number": 3.141,
    "string": "a string",
    "string2": "another string",
+   "null": null,
    "map": {
       "key": "value",
       "array": [
@@ -46,6 +47,8 @@ sub create {
     $yajl->string("a string");
     $yajl->string("string2");
     $yajl->string("another string");
+    $yajl->string("null");
+    $yajl->null();
     $yajl->string("map");
     $yajl->map_open();
     $yajl->string("key");

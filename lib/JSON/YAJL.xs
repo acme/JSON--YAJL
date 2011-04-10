@@ -49,7 +49,7 @@ CODE:
 void null(g)
     JSON::YAJL g
 CODE:
-    yajl_gen_nul(g);
+    yajl_gen_null(g);
 
 void bool(g, b)
     JSON::YAJL g
