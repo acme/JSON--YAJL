@@ -23,3 +23,5 @@ yajl/yajl_parser.c
 yajl/yajl_parser.h
 yajl/yajl_version.c
 yajl/yajl_version.h
+README
+META.yml
