@@ -1,0 +1,25 @@
+Build.PL
+lib/JSON/YAJL.pm
+lib/JSON/YAJL.xs
+Makefile.PL
+MANIFEST			This list of files
+t/simple.t
+typemap
+yajl/yajl.c
+yajl/yajl_alloc.c
+yajl/yajl_alloc.h
+yajl/yajl_buf.c
+yajl/yajl_buf.h
+yajl/yajl_bytestack.h
+yajl/yajl_common.h
+yajl/yajl_encode.c
+yajl/yajl_encode.h
+yajl/yajl_gen.c
+yajl/yajl_gen.h
+yajl/yajl_lex.c
+yajl/yajl_lex.h
+yajl/yajl_parse.h
+yajl/yajl_parser.c
+yajl/yajl_parser.h
+yajl/yajl_version.c
+yajl/yajl_version.h
