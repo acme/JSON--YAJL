@@ -1,4 +1,5 @@
 Build.PL
+CHANGES
 lib/JSON/YAJL.pm
 lib/JSON/YAJL/Generator.pm
 lib/JSON/YAJL/Generator.xs
