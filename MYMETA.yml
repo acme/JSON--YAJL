@@ -1,5 +1,5 @@
 ---
-abstract: 'An interface to the excellent YAJL JSON parsing and generation library'
+abstract: 'An interface to the YAJL JSON parsing and generation library'
 author:
   - 'Leon Brocard <acme@astray.com>'
 build_requires:
