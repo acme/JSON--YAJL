@@ -17,6 +17,9 @@ provides:
   JSON::YAJL:
     file: lib/JSON/YAJL.pm
     version: 0.01
+  JSON::YAJL::Generator:
+    file: lib/JSON/YAJL/Generator.pm
+    version: 0.01
 resources:
   license: http://dev.perl.org/licenses/
 version: 0.01
