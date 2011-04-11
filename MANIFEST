@@ -1,6 +1,7 @@
 Build.PL
 lib/JSON/YAJL.pm
-lib/JSON/YAJL.xs
+lib/JSON/YAJL/Generator.pm
+lib/JSON/YAJL/Generator.xs
 Makefile.PL
 MANIFEST			This list of files
 t/simple.t
