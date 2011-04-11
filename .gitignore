@@ -1,0 +1,7 @@
+# ignore objects
+*.[oa]
+Build
+_build
+blib
+JSON-YAJL-*
+lib/JSON/YAJL/Generator.c
