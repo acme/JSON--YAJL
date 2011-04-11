@@ -6,6 +6,7 @@
 #include <stdlib.h>  
 #include <string.h>
 #include <stdint.h>
+#include "ppport.h"
 
 typedef yajl_gen JSON__YAJL__Generator;
 

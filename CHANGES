@@ -1,4 +1,8 @@
 Revision history for Perl module JSON::YAJL:
 
+0.02
+     - include ppport.h as we use newSVpvn_utf8 (which only came
+       in with 5.011000), as pointed out by Andreas J. König
+
 0.01 Mon Apr 11 11:46:04 CEST 2011
      - initial release
