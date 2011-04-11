@@ -6,7 +6,7 @@ use Module::Build;
 my $build = Module::Build->new(
     module_name => 'JSON::YAJL',
     dist_abstract =>
-        'An interface to the excellent YAJL JSON parsing and generation library',
+        'An interface to the YAJL JSON parsing and generation library',
     dist_author    => 'Leon Brocard <acme@astray.com>',
     license        => 'perl',
     build_requires => { 'ExtUtils::CBuilder' => 0 },
