@@ -5,6 +5,7 @@ Revision history for Perl module JSON::YAJL:
        by ppport.h (this should fix compilation problems with older
        Perls)
      - do not ship a Makefile.PL
+     - do not include stdint.h as we do not need it
 
 0.02 Mon Apr 11 15:39:18 CEST 2011
      - include ppport.h as we use newSVpvn_utf8 (which only came

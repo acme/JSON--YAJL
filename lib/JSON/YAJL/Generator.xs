@@ -5,7 +5,6 @@
 #include <stdio.h>  
 #include <stdlib.h>  
 #include <string.h>
-#include <stdint.h>
 #define NEED_newSVpvn_flags
 #define NEED_sv_2pv_flags
 #include "ppport.h"
