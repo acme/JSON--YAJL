@@ -2,7 +2,7 @@ package JSON::YAJL;
 use strict;
 use warnings;
 use JSON::YAJL::Generator;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 1;
 

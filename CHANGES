@@ -1,6 +1,6 @@
 Revision history for Perl module JSON::YAJL:
 
-0.03
+0.03 Tue Apr 12 09:56:35 CEST 2011
      - define NEED_newSVpvn_flags and NEED_sv_2pv_flags, as suggested
        by ppport.h (this should fix compilation problems with older
        Perls)
