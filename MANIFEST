@@ -4,7 +4,6 @@ lib/JSON/YAJL.pm
 lib/JSON/YAJL/Generator.pm
 lib/JSON/YAJL/Generator.xs
 lib/JSON/YAJL/ppport.h
-Makefile.PL
 MANIFEST			This list of files
 t/pod.t
 t/simple.t

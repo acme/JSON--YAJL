@@ -4,6 +4,7 @@ Revision history for Perl module JSON::YAJL:
      - define NEED_newSVpvn_flags and NEED_sv_2pv_flags, as suggested
        by ppport.h (this should fix compilation problems with older
        Perls)
+     - do not ship a Makefile.PL
 
 0.02 Mon Apr 11 15:39:18 CEST 2011
      - include ppport.h as we use newSVpvn_utf8 (which only came
