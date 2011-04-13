@@ -3,6 +3,7 @@ Revision history for Perl module JSON::YAJL:
 0.04
      - use 4 instead of 1.23 for testing doubles, as we can't test
        it in a cross-platform way
+     - work around not finding isinf under Solaris
      - add const char * to the typemap to support Perl 5.6
 
 0.03 Tue Apr 12 09:56:35 CEST 2011
