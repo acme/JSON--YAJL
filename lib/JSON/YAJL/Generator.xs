@@ -14,19 +14,19 @@ typedef yajl_gen JSON__YAJL__Generator;
 void croak_on_status(yajl_gen_status s) {
     if (s == yajl_gen_status_ok) {
     } else if (s == yajl_gen_keys_must_be_strings) {
-        Perl_croak("YAJL: Keys must be strings");
+        Perl_croak(aTHX_ "YAJL: Keys must be strings");
     } else if (s == yajl_max_depth_exceeded) {
-        Perl_croak("YAJL: Max depth exceeded");
+        Perl_croak(aTHX_ "YAJL: Max depth exceeded");
     } else if (s == yajl_gen_in_error_state) {
-        Perl_croak("YAJL: In error state");
+        Perl_croak(aTHX_ "YAJL: In error state");
     } else if (s == yajl_gen_generation_complete) {
-        Perl_croak("YAJL: Generation complete");
+        Perl_croak(aTHX_ "YAJL: Generation complete");
     } else if (s == yajl_gen_invalid_number) {
-        Perl_croak("YAJL: Invalid number");
+        Perl_croak(aTHX_ "YAJL: Invalid number");
     } else if (s == yajl_gen_no_buf) {
-        Perl_croak("YAJL: No buf");
+        Perl_croak(aTHX_ "YAJL: No buf");
     } else {
-        Perl_croak("YAJL: Unknown status");
+        Perl_croak(aTHX_ "YAJL: Unknown status");
     }
 }
 
