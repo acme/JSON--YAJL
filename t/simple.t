@@ -8,14 +8,14 @@ use Test::More;
 my $yajl_default = JSON::YAJL::Generator->new();
 isa_ok( $yajl_default, 'JSON::YAJL::Generator' );
 is( create($yajl_default),
-    '{"integer":123,"double":1.2299999999999999822,"number":3.141,"string":"a string","string2":"another string","null":null,"true":true,"false":false,"map":{"key":"value","array":[1,2,3]}}'
+    '{"integer":123,"double":4,"number":3.141,"string":"a string","string2":"another string","null":null,"true":true,"false":false,"map":{"key":"value","array":[1,2,3]}}'
 );
 
 my $yajl_pretty = JSON::YAJL::Generator->new( 1, '   ' );
 isa_ok( $yajl_pretty, 'JSON::YAJL::Generator' );
 is( create($yajl_pretty), '{
    "integer": 123,
-   "double": 1.2299999999999999822,
+   "double": 4,
    "number": 3.141,
    "string": "a string",
    "string2": "another string",
@@ -42,7 +42,7 @@ sub create {
     $yajl->string("integer");
     $yajl->integer(123);
     $yajl->string("double");
-    $yajl->double("1.23");
+    $yajl->double("4");    # we can't test this in a cross-platform way
     $yajl->string("number");
     $yajl->number("3.141");
     $yajl->string("string");
