@@ -11,6 +11,25 @@
 
 typedef yajl_gen JSON__YAJL__Generator;
 
+void croak_on_status(yajl_gen_status s) {
+    if (s == yajl_gen_status_ok) {
+    } else if (s == yajl_gen_keys_must_be_strings) {
+        Perl_croak("YAJL: Keys must be strings");
+    } else if (s == yajl_max_depth_exceeded) {
+        Perl_croak("YAJL: Max depth exceeded");
+    } else if (s == yajl_gen_in_error_state) {
+        Perl_croak("YAJL: In error state");
+    } else if (s == yajl_gen_generation_complete) {
+        Perl_croak("YAJL: Generation complete");
+    } else if (s == yajl_gen_invalid_number) {
+        Perl_croak("YAJL: Invalid number");
+    } else if (s == yajl_gen_no_buf) {
+        Perl_croak("YAJL: No buf");
+    } else {
+        Perl_croak("YAJL: Unknown status");
+    }
+}
+
 MODULE = JSON::YAJL::Generator		PACKAGE = JSON::YAJL::Generator
 
 JSON::YAJL::Generator new(package, beautify = 0, indentString = "    ")
@@ -28,63 +47,63 @@ void integer(g, n)
     JSON::YAJL::Generator g
     long int n
 CODE:
-    yajl_gen_integer(g, n);
+    croak_on_status(yajl_gen_integer(g, n));
 
 void double(g, n)
     JSON::YAJL::Generator g
     double n
 CODE:
-    yajl_gen_double(g, n);
+    croak_on_status(yajl_gen_double(g, n));
 
 void number(g, n)
     JSON::YAJL::Generator g
     SV* n
 CODE:
-    yajl_gen_number(g, SvPV_nolen(n), SvCUR(n));
+    croak_on_status(yajl_gen_number(g, SvPV_nolen(n), SvCUR(n)));
 
 void string(g, s)
     JSON::YAJL::Generator g
     SV* s
 CODE:
-    yajl_gen_string(g, SvPV_nolen(s), SvCUR(s));
+    croak_on_status(yajl_gen_string(g, SvPV_nolen(s), SvCUR(s)));
 
 void null(g)
     JSON::YAJL::Generator g
 CODE:
-    yajl_gen_null(g);
+    croak_on_status(yajl_gen_null(g));
 
 void bool(g, b)
     JSON::YAJL::Generator g
     SV* b
 CODE:
-    yajl_gen_bool(g, SvTRUE(b));
+    croak_on_status(yajl_gen_bool(g, SvTRUE(b)));
 
 void map_open(g)
     JSON::YAJL::Generator g
 CODE:
-    yajl_gen_map_open(g);
+    croak_on_status(yajl_gen_map_open(g));
 
 void map_close(g)
     JSON::YAJL::Generator g
 CODE:
-    yajl_gen_map_close(g);
+    croak_on_status(yajl_gen_map_close(g));
 
 void array_open(g)
     JSON::YAJL::Generator g
 CODE:
-    yajl_gen_array_open(g);
+    croak_on_status(yajl_gen_array_open(g));
 
 void array_close(g)
     JSON::YAJL::Generator g
 CODE:
-    yajl_gen_array_close(g);
+    croak_on_status(yajl_gen_array_close(g));
 
 SV* get_buf(g)
     JSON::YAJL::Generator g
 CODE:
     const unsigned char* buf;
     unsigned int len;
-    yajl_gen_get_buf(g, &buf, &len);
+    croak_on_status(yajl_gen_get_buf(g, &buf, &len));
     RETVAL = newSVpvn_utf8(buf, (STRLEN)len, 1);
 OUTPUT:
     RETVAL

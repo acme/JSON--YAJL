@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use ExtUtils::testlib;
 use JSON::YAJL;
+use Test::Exception;
 use Test::More;
 
 my $yajl_default = JSON::YAJL::Generator->new();
@@ -33,6 +34,28 @@ is( create($yajl_pretty), '{
 }
 '
 );
+
+my $yajl_keys_must_be_strings = JSON::YAJL::Generator->new();
+$yajl_keys_must_be_strings->map_open();
+throws_ok { $yajl_keys_must_be_strings->integer(1) } qr/Keys must be strings/;
+
+my $yajl_generation_complete = JSON::YAJL::Generator->new();
+$yajl_generation_complete->map_open();
+$yajl_generation_complete->map_close();
+throws_ok { $yajl_generation_complete->map_open() } qr/Generation complete/;
+
+my $yajl_max_depth = JSON::YAJL::Generator->new();
+foreach my $i ( 1 .. 127 ) {
+    $yajl_max_depth->map_open();
+    $yajl_max_depth->string("a$i");
+}
+throws_ok { $yajl_max_depth->map_open() } qr/Max depth exceeded/;
+
+my $yajl_invalid_number = JSON::YAJL::Generator->new();
+$yajl_invalid_number->map_open();
+$yajl_invalid_number->string('number');
+throws_ok { $yajl_invalid_number->double( 0 + "inf" ); } qr/Invalid number/;
+throws_ok { $yajl_invalid_number->double( 0 + "nan" ); } qr/Invalid number/;
 
 done_testing();
 

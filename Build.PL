@@ -10,6 +10,7 @@ my $build = Module::Build->new(
     dist_author    => 'Leon Brocard <acme@astray.com>',
     license        => 'perl',
     build_requires => { 'ExtUtils::CBuilder' => 0 },
+    requires       => { 'Test::More' => 0, 'Test::Exception' => 0 },
     c_source       => 'yajl',
     needs_compiler => 1,
     create_readme  => 1,

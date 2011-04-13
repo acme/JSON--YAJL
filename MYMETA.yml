@@ -20,6 +20,9 @@ provides:
   JSON::YAJL::Generator:
     file: lib/JSON/YAJL/Generator.pm
     version: 0.03
+requires:
+  Test::Exception: 0
+  Test::More: 0
 resources:
   license: http://dev.perl.org/licenses/
 version: 0.03
