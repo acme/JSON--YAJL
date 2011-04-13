@@ -138,7 +138,7 @@ yajl_gen_free(yajl_gen g)
     }
 
 #define ENSURE_NOT_KEY \
-    if (g->state[g->depth] == yajl_gen_map_key) {   \
+    if (g->state[g->depth] == yajl_gen_map_key || g->state[g->depth] == yajl_gen_map_start) {   \
         return yajl_gen_keys_must_be_strings;       \
     }                                               \
 
