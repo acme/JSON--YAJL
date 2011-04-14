@@ -1,5 +1,8 @@
 Revision history for Perl module JSON::YAJL:
 
+0.06
+     - fix minor documentation typo
+
 0.05 Thu Apr 14 10:26:20 CEST 2011
      - use aTHX_ when Perl_croak-ing to work on threaded Perls
      - only test inf and nan on Perl 5.8.8 and later
