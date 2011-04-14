@@ -74,7 +74,7 @@ JSON::YAJL::Generator - JSON generation with YAJL
 
 =head1 DESCRIPTION
 
-This module allows you to generator JSON with YAJL. This is quite a low-level
+This module allows you to generate JSON with YAJL. This is quite a low-level
 interface for generating JSON and it accumulates JSON in an internal buffer
 until you fetch it.
 
