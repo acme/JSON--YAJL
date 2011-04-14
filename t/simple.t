@@ -51,11 +51,16 @@ foreach my $i ( 1 .. 127 ) {
 }
 throws_ok { $yajl_max_depth->map_open() } qr/Max depth exceeded/;
 
-my $yajl_invalid_number = JSON::YAJL::Generator->new();
-$yajl_invalid_number->map_open();
-$yajl_invalid_number->string('number');
-throws_ok { $yajl_invalid_number->double( 0 + "inf" ); } qr/Invalid number/;
-throws_ok { $yajl_invalid_number->double( 0 + "nan" ); } qr/Invalid number/;
+# Only works in 5.8.8 and later
+if ( $] > 5.008008 ) {
+    my $yajl_invalid_number = JSON::YAJL::Generator->new();
+    $yajl_invalid_number->map_open();
+    $yajl_invalid_number->string('number');
+    throws_ok { $yajl_invalid_number->double( 0 + "inf" ); }
+    qr/Invalid number/;
+    throws_ok { $yajl_invalid_number->double( 0 + "nan" ); }
+    qr/Invalid number/;
+}
 
 done_testing();
 

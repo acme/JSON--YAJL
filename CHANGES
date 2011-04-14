@@ -2,6 +2,7 @@ Revision history for Perl module JSON::YAJL:
 
 0.05
      - use aTHX_ when Perl_croak-ing to work on threaded Perls
+     - only test inf and nan on Perl 5.8.8 and later
 
 0.04 Wed Apr 13 17:09:21 CEST 2011
      - use 4 instead of 1.23 for testing doubles, as we can't test
