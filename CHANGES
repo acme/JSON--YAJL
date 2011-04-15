@@ -4,6 +4,8 @@ Revision history for Perl module JSON::YAJL:
      - fix minor documentation typo
      - don't test inf and nan under MSWin32
      - add an interface to the parser
+     - take advantage of typemaps and declarations to minimize
+       XS code
 
 0.05 Thu Apr 14 10:26:20 CEST 2011
      - use aTHX_ when Perl_croak-ing to work on threaded Perls

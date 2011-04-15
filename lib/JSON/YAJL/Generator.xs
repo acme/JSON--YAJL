@@ -32,9 +32,7 @@ void croak_on_status(yajl_gen_status s) {
 
 MODULE = JSON::YAJL::Generator		PACKAGE = JSON::YAJL::Generator
 
-JSON::YAJL::Generator new(package, beautify = 0, indentString = "    ")
-    unsigned int beautify
-    const char * indentString
+JSON::YAJL::Generator new(package, unsigned int beautify = 0, const char * indentString = "    ")
 CODE:
     yajl_gen_config conf = { beautify, indentString };
     yajl_gen g;
@@ -43,63 +41,47 @@ CODE:
 OUTPUT:
     RETVAL
 
-void integer(g, n)
-    JSON::YAJL::Generator g
-    long int n
+void integer(JSON::YAJL::Generator g, long int n)
 CODE:
     croak_on_status(yajl_gen_integer(g, n));
 
-void double(g, n)
-    JSON::YAJL::Generator g
-    double n
+void double(JSON::YAJL::Generator g, double n)
 CODE:
     croak_on_status(yajl_gen_double(g, n));
 
-void number(g, n)
-    JSON::YAJL::Generator g
-    SV* n
+void number(JSON::YAJL::Generator g, char * n, unsigned int length(n))
 CODE:
-    croak_on_status(yajl_gen_number(g, SvPV_nolen(n), SvCUR(n)));
+    croak_on_status(yajl_gen_number(g, n, XSauto_length_of_n));
 
-void string(g, s)
-    JSON::YAJL::Generator g
-    SV* s
+void string(JSON::YAJL::Generator g, char * s, unsigned int length(s))
 CODE:
-    croak_on_status(yajl_gen_string(g, SvPV_nolen(s), SvCUR(s)));
+    croak_on_status(yajl_gen_string(g, s, XSauto_length_of_s));
 
-void null(g)
-    JSON::YAJL::Generator g
+void null(JSON::YAJL::Generator g)
 CODE:
     croak_on_status(yajl_gen_null(g));
 
-void bool(g, b)
-    JSON::YAJL::Generator g
-    SV* b
+void bool(JSON::YAJL::Generator g, bool b)
 CODE:
-    croak_on_status(yajl_gen_bool(g, SvTRUE(b)));
+    croak_on_status(yajl_gen_bool(g, b));
 
-void map_open(g)
-    JSON::YAJL::Generator g
+void map_open(JSON::YAJL::Generator g)
 CODE:
     croak_on_status(yajl_gen_map_open(g));
 
-void map_close(g)
-    JSON::YAJL::Generator g
+void map_close(JSON::YAJL::Generator g)
 CODE:
     croak_on_status(yajl_gen_map_close(g));
 
-void array_open(g)
-    JSON::YAJL::Generator g
+void array_open(JSON::YAJL::Generator g)
 CODE:
     croak_on_status(yajl_gen_array_open(g));
 
-void array_close(g)
-    JSON::YAJL::Generator g
+void array_close(JSON::YAJL::Generator g)
 CODE:
     croak_on_status(yajl_gen_array_close(g));
 
-SV* get_buf(g)
-    JSON::YAJL::Generator g
+SV* get_buf(JSON::YAJL::Generator g)
 CODE:
     const unsigned char* buf;
     unsigned int len;
@@ -108,12 +90,10 @@ CODE:
 OUTPUT:
     RETVAL
 
-void clear(g)
-    JSON::YAJL::Generator g
+void clear(JSON::YAJL::Generator g)
 CODE:
     yajl_gen_clear(g);
 
-void DESTROY(g)
-    JSON::YAJL::Generator g
+void DESTROY(JSON::YAJL::Generator g)
 CODE:
     yajl_gen_free(g);

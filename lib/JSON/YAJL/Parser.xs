@@ -15,9 +15,7 @@ typedef yajl_handle JSON__YAJL__Parser;
 
 MODULE = JSON::YAJL::Parser		PACKAGE = JSON::YAJL::Parser
 
-JSON::YAJL::Parser new(package, allowComments = 0, checkUTF8 = 0)
-    unsigned int allowComments
-    unsigned int checkUTF8
+JSON::YAJL::Parser new(package, unsigned int allowComments = 0, unsigned int checkUTF8 = 0)
 CODE:
     yajl_parser_config config = { allowComments, checkUTF8 };
     yajl_handle parser;
@@ -27,9 +25,7 @@ CODE:
 OUTPUT:
     RETVAL
 
-void parse(parser, data)
-    JSON::YAJL::Parser parser
-    SV* data
+void parse(JSON::YAJL::Parser parser, SV* data)
 CODE:
     const unsigned char * jsonText;
     unsigned int jsonTextLength;
@@ -44,8 +40,7 @@ CODE:
         Perl_croak(aTHX_ "%s", error);
     }
 
-void parse_complete(parser)
-    JSON::YAJL::Parser parser
+void parse_complete(JSON::YAJL::Parser parser)
 CODE:
     yajl_status status;
     unsigned char * error;
@@ -61,7 +56,6 @@ CODE:
         Perl_croak(aTHX_ "%s", error);
     }
 
-void DESTROY(parser)
-    JSON::YAJL::Parser parser
+void DESTROY(JSON::YAJL::Parser parser)
 CODE:
     yajl_free(parser);
