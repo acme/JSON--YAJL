@@ -6,6 +6,10 @@ use JSON::YAJL;
 use Test::Exception;
 use Test::More;
 
+my $yajl_empty = JSON::YAJL::Parser->new();
+isa_ok( $yajl_empty, 'JSON::YAJL::Parser' );
+throws_ok { $yajl_empty->parse_complete() } qr/unknown error/;
+
 my $yajl = JSON::YAJL::Parser->new();
 isa_ok( $yajl, 'JSON::YAJL::Parser' );
 my $json
