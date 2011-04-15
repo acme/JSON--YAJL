@@ -51,8 +51,8 @@ foreach my $i ( 1 .. 127 ) {
 }
 throws_ok { $yajl_max_depth->map_open() } qr/Max depth exceeded/;
 
-# Only works in 5.8.8 and later
-if ( $] > 5.008008 ) {
+# Only works in 5.8.8 and later (and not Windows)
+if ( $] > 5.008008 && $^O ne 'MSWin32' ) {
     my $yajl_invalid_number = JSON::YAJL::Generator->new();
     $yajl_invalid_number->map_open();
     $yajl_invalid_number->string('number');
