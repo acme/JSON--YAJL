@@ -2,6 +2,7 @@ package JSON::YAJL;
 use strict;
 use warnings;
 use JSON::YAJL::Generator;
+use JSON::YAJL::Parser;
 our $VERSION = '0.05';
 
 1;
@@ -37,4 +38,4 @@ This module is free software; you can redistribute it or modify it under the sam
 
 =head1 SEE ALSO
 
-L<JSON::YAJL::Generator>
+L<JSON::YAJL::Generator>, L<JSON::YAJL::Parser>

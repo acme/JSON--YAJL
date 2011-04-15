@@ -3,10 +3,13 @@ CHANGES
 lib/JSON/YAJL.pm
 lib/JSON/YAJL/Generator.pm
 lib/JSON/YAJL/Generator.xs
+lib/JSON/YAJL/Parser.pm
+lib/JSON/YAJL/Parser.xs
 lib/JSON/YAJL/ppport.h
 MANIFEST			This list of files
+t/generator.t
+t/parser.t
 t/pod.t
-t/simple.t
 typemap
 yajl/yajl.c
 yajl/yajl_alloc.c

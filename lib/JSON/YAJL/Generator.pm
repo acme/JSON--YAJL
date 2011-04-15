@@ -94,4 +94,4 @@ This module is free software; you can redistribute it or modify it under the sam
 
 =head1 SEE ALSO
 
-L<JSON::YAJL>
+L<JSON::YAJL>, L<JSON::YAJL::Parser>
