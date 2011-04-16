@@ -14,7 +14,7 @@ JSON::YAJL::Generator - JSON generation with YAJL
 
 =head1 SYNOPSIS
 
-  use JSON::YAJL::Generator;
+  use JSON::YAJL;
   my $yajl = JSON::YAJL::Generator->new();
   # or to beautify (indent):
   #  my $yajl = JSON::YAJL::Generator->new( 1, '    ' );
