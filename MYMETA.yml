@@ -20,6 +20,9 @@ provides:
   JSON::YAJL::Generator:
     file: lib/JSON/YAJL/Generator.pm
     version: 0.05
+  JSON::YAJL::Parser:
+    file: lib/JSON/YAJL/Parser.pm
+    version: 0.05
 requires:
   Test::Exception: 0
   Test::More: 0
