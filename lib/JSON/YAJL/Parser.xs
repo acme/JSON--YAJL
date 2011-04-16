@@ -134,8 +134,8 @@ static int callback_string(void * hashref, const unsigned char * s, unsigned int
     return 1;
 }
 
-static int callback_start_map(void * hashref) {
-    DEBUG && printf("start_map\n");
+static int callback_map_open(void * hashref) {
+    DEBUG && printf("map_open\n");
     dSP;
     ENTER;
     SAVETMPS;
@@ -157,8 +157,8 @@ static int callback_map_key(void * hashref, const unsigned char * s, unsigned in
     return 1;
 }
 
-static int callback_end_map(void * hashref) {
-    DEBUG && printf("end_map\n");
+static int callback_map_close(void * hashref) {
+    DEBUG && printf("map_close\n");
     dSP;
     ENTER;
     SAVETMPS;
@@ -168,8 +168,8 @@ static int callback_end_map(void * hashref) {
     return 1;
 }
 
-static int callback_start_array(void * hashref) {
-    DEBUG && printf("start_array\n");
+static int callback_array_open(void * hashref) {
+    DEBUG && printf("array_open\n");
     dSP;
     ENTER;
     SAVETMPS;
@@ -179,8 +179,8 @@ static int callback_start_array(void * hashref) {
     return 1;
 }
 
-static int callback_end_array(void * hashref) {
-    DEBUG && printf("end_array\n");
+static int callback_array_close(void * hashref) {
+    DEBUG && printf("array_close\n");
     dSP;
     ENTER;
     SAVETMPS;
@@ -197,11 +197,11 @@ static yajl_callbacks callbacks = {
     NULL,
     callback_number,
     callback_string,
-    callback_start_map,
+    callback_map_open,
     callback_map_key,
-    callback_end_map,
-    callback_start_array,
-    callback_end_array,
+    callback_map_close,
+    callback_array_open,
+    callback_array_close,
     };
 
 MODULE = JSON::YAJL::Parser		PACKAGE = JSON::YAJL::Parser
