@@ -1,5 +1,7 @@
 Build.PL
 CHANGES
+examples/json_reformat.pl
+examples/small.json
 lib/JSON/YAJL.pm
 lib/JSON/YAJL/Generator.pm
 lib/JSON/YAJL/Generator.xs
