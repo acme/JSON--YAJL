@@ -7,10 +7,15 @@ lib/JSON/YAJL/Parser.pm
 lib/JSON/YAJL/Parser.xs
 lib/JSON/YAJL/ppport.h
 MANIFEST			This list of files
+META.yml
+README
 t/generator.t
 t/parser.t
 t/pod.t
 typemap
+yajl/ChangeLog
+yajl/COPYING
+yajl/README
 yajl/yajl.c
 yajl/yajl_alloc.c
 yajl/yajl_alloc.h
@@ -29,5 +34,3 @@ yajl/yajl_parser.c
 yajl/yajl_parser.h
 yajl/yajl_version.c
 yajl/yajl_version.h
-README
-META.yml
