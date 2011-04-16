@@ -13,16 +13,223 @@
 
 typedef yajl_handle JSON__YAJL__Parser;
 
+int DEBUG = 0;
+
+void callback_call(SV* hashref, unsigned int index) {
+    HV* hash;
+    SV** array_p;
+    SV* arrayref;
+    AV* array;
+    SV** callback_p;
+    SV* callbackref;
+    SV* callback;
+
+    if (!SvOK((SV*) hashref)) {
+        Perl_croak(aTHX_ "YAJL: hashref is not defined");
+    } else {
+        DEBUG && printf("  hashref is defined\n");
+    }
+    if (!SvROK((SV*) hashref)) {
+        Perl_croak(aTHX_ "YAJL: hashref is not a reference");
+    } else {
+        DEBUG && printf("  hashref is a reference\n");
+    }
+    hash = (HV*) SvRV((SV*) hashref);
+    if (SvTYPE(hash) != SVt_PVHV) {
+        Perl_croak(aTHX_ "YAJL: hash is not a PVHV");
+    } else {
+        DEBUG && printf("  hash is a PVHV\n");
+    }
+    array_p = hv_fetchs(hash, "array", 0);
+    if (array_p == NULL) {
+        Perl_croak(aTHX_ "YAJL: array_p is NULL");
+    } else {
+        DEBUG && printf("  array_p is not NULL\n");
+    }
+    arrayref = (SV*) *array_p;
+    if (!SvROK(arrayref)) {
+        printf("type is %i\n", SvTYPE(arrayref));
+        Perl_croak(aTHX_ "YAJL: arrayref is not a reference");
+    } else {
+        DEBUG && printf("  arrayref is a reference\n");
+    }
+    array = (AV*) SvRV(arrayref);
+    if (SvTYPE(array) != SVt_PVAV) {
+        printf("type is %i\n", SvTYPE(array));
+        Perl_croak(aTHX_ "YAJL: array is not a PVAV");
+    } else {
+        DEBUG && printf("  array is a PVAV\n");
+    }
+    callback_p =  av_fetch(array, index, 0);
+    if (callback_p == NULL) {
+        DEBUG && printf("  nothing in array slot\n");
+        return;
+    } else {
+        DEBUG && printf("  something in array slot\n");
+    }
+    callbackref = (SV*) *callback_p;
+    if (!SvROK((SV*) callbackref)) {
+        Perl_croak(aTHX_ "YAJL: callbackref is not a reference");
+    } else {
+        DEBUG && printf("  callbackref is a reference\n");
+    }
+
+    callback = (SV*) SvRV((SV*) callbackref);
+    if (SvTYPE(callback) != SVt_PVCV) {
+        Perl_croak(aTHX_ "YAJL: callback is not a PVCV");
+    } else {
+        DEBUG && printf("  callback is a PVCV\n");
+    }
+    dSP;
+    DEBUG && printf("  about to call callback\n");
+    call_sv(callback, G_DISCARD);
+    FREETMPS;
+    LEAVE;
+}
+
+static int callback_null(void * hashref) {
+    DEBUG && printf("null\n");
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    PUTBACK;
+    callback_call((SV*) hashref, 0);
+    return 1;
+}
+
+static int callback_boolean(void * hashref, int boolean) {
+    DEBUG && printf("boolean %i\n", boolean);
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    XPUSHs(sv_2mortal(newSViv(boolean)));
+    PUTBACK;
+    callback_call((SV*) hashref, 1);
+    return 1;
+}
+
+static int callback_number(void * hashref, const char * s, unsigned int l) {
+    DEBUG && printf("number %.*s\n", l, s);
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    XPUSHs(sv_2mortal(newSVpv(s, l)));
+    PUTBACK;
+    callback_call((SV*) hashref, 4);
+    return 1;
+}
+
+static int callback_string(void * hashref, const unsigned char * s, unsigned int l) {
+    DEBUG && printf("string %.*s\n", l, s);
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    XPUSHs(sv_2mortal(newSVpv(s, l)));
+    PUTBACK;
+    callback_call((SV*) hashref, 5);
+    return 1;
+}
+
+static int callback_start_map(void * hashref) {
+    DEBUG && printf("start_map\n");
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    PUTBACK;
+    callback_call((SV*) hashref, 6);
+    return 1;
+}
+
+static int callback_map_key(void * hashref, const unsigned char * s, unsigned int l) {
+    DEBUG && printf("map_key %.*s\n", l, s);
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    XPUSHs(sv_2mortal(newSVpv(s, l)));
+    PUTBACK;
+    callback_call((SV*) hashref, 7);
+    return 1;
+}
+
+static int callback_end_map(void * hashref) {
+    DEBUG && printf("end_map\n");
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    PUTBACK;
+    callback_call((SV*) hashref, 8);
+    return 1;
+}
+
+static int callback_start_array(void * hashref) {
+    DEBUG && printf("start_array\n");
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    PUTBACK;
+    callback_call((SV*) hashref, 9);
+    return 1;
+}
+
+static int callback_end_array(void * hashref) {
+    DEBUG && printf("end_array\n");
+    dSP;
+    ENTER;
+    SAVETMPS;
+    PUSHMARK(SP);
+    PUTBACK;
+    callback_call((SV*) hashref, 10);
+    return 1;
+}
+
+static yajl_callbacks callbacks = {
+    callback_null,
+    callback_boolean,
+    NULL,
+    NULL,
+    callback_number,
+    callback_string,
+    callback_start_map,
+    callback_map_key,
+    callback_end_map,
+    callback_start_array,
+    callback_end_array,
+    };
+
 MODULE = JSON::YAJL::Parser		PACKAGE = JSON::YAJL::Parser
 
-JSON::YAJL::Parser new(package, unsigned int allowComments = 0, unsigned int checkUTF8 = 0)
+JSON::YAJL::Parser new(package, unsigned int allowComments = 0, unsigned int checkUTF8 = 0, SV* arrayref)
 CODE:
     yajl_parser_config config = { allowComments, checkUTF8 };
     yajl_handle parser;
+    AV* array;
     HV *hash = newHV();
     hv_stores(hash, "data", newSVpv("", 0));
+    SvREFCNT_inc_void(arrayref);
+    if (!SvROK(arrayref)) {
+        printf("type is %i\n", SvTYPE(arrayref));
+        Perl_croak(aTHX_ "YAJL: arrayref is not a reference");
+    } else {
+        DEBUG && printf("arrayref is a reference\n");
+    }
+    array = (AV*) SvRV(arrayref);
+    if (SvTYPE(array) != SVt_PVAV) {
+        printf("type is %i\n", SvTYPE(array));
+        Perl_croak(aTHX_ "YAJL: array is not a PVAV");
+    } else {
+        DEBUG && printf("array is an PVAV\n");
+    }
+    hv_stores(hash, "array", arrayref);
     SV *hashref = newRV_noinc((SV*)hash);
-    parser = yajl_alloc(NULL, &config, NULL, (void *) hashref);
+    parser = yajl_alloc(&callbacks, &config, NULL, (void *) hashref);
     RETVAL = parser;
 OUTPUT:
     RETVAL
@@ -72,4 +279,26 @@ CODE:
 
 void DESTROY(JSON::YAJL::Parser parser)
 CODE:
+    SV* hashref;
+    HV* hash;
+    SV** array_p;
+    SV* arrayref;
+
+    hashref = (SV*) parser->ctx;
+    hash = (HV*) SvRV(hashref);
+    array_p = hv_fetchs(hash, "array", 0);
+    if (array_p == NULL) {
+        Perl_croak(aTHX_ "YAJL: DESTROY array_p is NULL");
+    } else {
+        DEBUG && printf("destroy array_p is not NULL\n");
+    }
+    arrayref = (SV*) *array_p;
+    if (!SvROK(arrayref)) {
+        printf("type is %i\n", SvTYPE(arrayref));
+        Perl_croak(aTHX_ "YAJL: DESTROY arrayref is not a reference");
+    } else {
+        DEBUG && printf("destroy arrayref is a reference\n");
+    }
+    SvREFCNT_dec(arrayref);
+    DEBUG && printf("decreased refcount of arrayref\n");
     yajl_free(parser);
