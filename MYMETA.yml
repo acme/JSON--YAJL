@@ -16,16 +16,16 @@ name: JSON-YAJL
 provides:
   JSON::YAJL:
     file: lib/JSON/YAJL.pm
-    version: 0.05
+    version: 0.06
   JSON::YAJL::Generator:
     file: lib/JSON/YAJL/Generator.pm
-    version: 0.05
+    version: 0.06
   JSON::YAJL::Parser:
     file: lib/JSON/YAJL/Parser.pm
-    version: 0.05
+    version: 0.06
 requires:
   Test::Exception: 0
   Test::More: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.05
+version: 0.06
