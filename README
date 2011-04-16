@@ -4,7 +4,7 @@ NAME
 
 SYNOPSIS
       use JSON::YAJL;
-      # see JSON::YAJL::Generator
+      # see JSON::YAJL::Generator or JSON::YAJL::Parser
 
 DESCRIPTION
     YAJL is Yet Another JSON Library. YAJL is a small event-driven
@@ -12,8 +12,8 @@ DESCRIPTION
     generator, by Lloyd Hilaiel This module is a Perl interface to that
     library.
 
-    At the moment this only wraps the generation library, see
-    JSON::YAJL::Generator. Patches for parsing welcome.
+    At the moment this wraps the generation library, see
+    JSON::YAJL::Generator and the parsing library, see JSON::YAJL::Parser.
 
     This is a very early release to see how cross-platform the underlying
     code is. The API may change in future.
@@ -26,5 +26,5 @@ LICENSE
     the same terms as Perl itself.
 
 SEE ALSO
-    JSON::YAJL::Generator
+    JSON::YAJL::Generator, JSON::YAJL::Parser
 
