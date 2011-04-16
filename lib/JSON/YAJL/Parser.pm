@@ -1,7 +1,7 @@
 package JSON::YAJL::Parser;
 use strict;
 use warnings;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 require XSLoader;
 XSLoader::load( 'JSON::YAJL::Parser', $VERSION );
