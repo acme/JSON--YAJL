@@ -1,5 +1,8 @@
 Revision history for Perl module JSON::YAJL:
 
+0.07
+     - link to YAJL website, as pointed out by Olivier Mengué
+
 0.06 Sat Apr 16 19:22:54 CEST 2011
      - fix minor documentation typo
      - don't test inf and nan under MSWin32
