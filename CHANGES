@@ -4,6 +4,7 @@ Revision history for Perl module JSON::YAJL:
      - link to YAJL website, as pointed out by Olivier Mengué
      - add homepage, repository and bugtracker distribution metadata
      - add LICENSE file
+     - add a SAX builder example
 
 0.06 Sat Apr 16 19:22:54 CEST 2011
      - fix minor documentation typo
