@@ -15,5 +15,13 @@ my $build = Module::Build->new(
     needs_compiler => 1,
     create_readme  => 1,
     sign           => 1,
+    meta_add       => {
+        resources => {
+            homepage   => 'http://search.cpan.org/dist/JSON-YAJL/',
+            repository => 'https://github.com/acme/JSON--YAJL',
+            bugtracker =>
+                'http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL',
+        },
+    },
 );
 $build->create_build_script;
