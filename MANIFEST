@@ -8,6 +8,7 @@ lib/JSON/YAJL/Generator.xs
 lib/JSON/YAJL/Parser.pm
 lib/JSON/YAJL/Parser.xs
 lib/JSON/YAJL/ppport.h
+LICENSE
 MANIFEST			This list of files
 META.yml
 README

@@ -13,6 +13,7 @@ my $build = Module::Build->new(
     requires       => { 'Test::More' => 0, 'Test::Exception' => 0 },
     c_source       => 'yajl',
     needs_compiler => 1,
+    create_license => 1,
     create_readme  => 1,
     sign           => 1,
     meta_add       => {
