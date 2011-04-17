@@ -27,7 +27,13 @@ requires:
   Test::Exception: 0
   Test::More: 0
 resources:
-  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL
+  bugtracker:
+    mailto: bug-JSON-YAJL@rt.cpan.org
+    web: http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL
   homepage: http://search.cpan.org/dist/JSON-YAJL/
-  repository: https://github.com/acme/JSON--YAJL
+  license: http://dev.perl.org/licenses/
+  repository:
+    type: git
+    url: https://github.com/acme/JSON--YAJL
+    web: git@github.com:acme/JSON--YAJL.git
 version: 0.06

@@ -19,10 +19,20 @@ my $build = Module::Build->new(
     meta_merge     => {
         resources => {
             homepage   => 'http://search.cpan.org/dist/JSON-YAJL/',
-            repository => 'https://github.com/acme/JSON--YAJL',
-            bugtracker =>
-                'http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL',
+            repository => {
+                url  => 'https://github.com/acme/JSON--YAJL',
+                web  => 'git@github.com:acme/JSON--YAJL.git',
+                type => 'git',
+            },
+            bugtracker => {
+                web => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL',
+                mailto => 'bug-JSON-YAJL@rt.cpan.org',
+            }
         },
+    },
+    'meta-spec' => {
+        version => '2',
+        url     => 'http://search.cpan.org/perldoc?CPAN::Meta::Spec',
     },
 );
 $build->create_build_script;
