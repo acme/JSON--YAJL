@@ -28,5 +28,6 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL
   homepage: http://search.cpan.org/dist/JSON-YAJL/
+  license: http://dev.perl.org/licenses/
   repository: https://github.com/acme/JSON--YAJL
 version: 0.06
