@@ -20,13 +20,12 @@ JSON::YAJL - An interface to the YAJL JSON parsing and generation library
 
 YAJL is Yet Another JSON Library. YAJL is a small event-driven (SAX-style) JSON
 parser written in ANSI C, and a small validating JSON generator, by Lloyd
-Hilaiel This module is a Perl interface to that library.
+Hilaiel. This module is a Perl interface to that library.
 
 To find out more about YAJL, please visit http://lloyd.github.com/yajl/
 
-At the moment this wraps the generation library, see
-L<JSON::YAJL::Generator> and the parsing library, see
-L<JSON::YAJL::Parser>.
+For the generation library, see L<JSON::YAJL::Generator> and for the
+parsing library, see L<JSON::YAJL::Parser>.
 
 This is a very early release to see how cross-platform the underlying code is.
 The API may change in future.
