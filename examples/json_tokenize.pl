@@ -48,3 +48,24 @@ $parser->parse($json);
 $parser->parse_complete();
 
 print Dumper( \@tokens );
+
+=head1 NAME
+
+json_tokenize.pl - Tokenize JSON
+
+=head1 DESCRIPTION
+
+This example program uses the parsing parts of L<JSON::YAJL> to show how
+JSON is tokenized.
+
+=head1 AUTHOR
+
+Leon Brocard <acme@astray.com>
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it or modify it under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+L<JSON::YAJL>

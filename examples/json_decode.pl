@@ -141,3 +141,26 @@ sub action_bits {
     shift;
     return [@_];
 }
+
+=head1 NAME
+
+json_decode.pl - Decode JSON as a Perl data structure
+
+=head1 DESCRIPTION
+
+This example program uses the parsing parts of L<JSON::YAJL> and a parser
+based on L<Marpa> to decode JSON as a Perl data structure. This is an example
+of how a higher-level JSON parser could be build upon L<JSON::YAJL> and this
+is not recommended for serious use.
+
+=head1 AUTHOR
+
+Leon Brocard <acme@astray.com>
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it or modify it under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+L<JSON::YAJL>

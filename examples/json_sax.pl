@@ -61,3 +61,26 @@ $parser->parse_complete();
 $builder->end_element( { Name => 'json' } );
 $builder->end_document;
 print $builder->result->toString . "\n";
+
+=head1 NAME
+
+json_sax.pl - Reformat JSON as XML via SAX
+
+=head1 DESCRIPTION
+
+This example program uses the parsing parts of L<JSON::YAJL> and the XML
+generation parts of L<XML::LibXML::SAX::Builder> to reformat JSON as XML.
+This is an example of how similar the APIs are and this is not recommended
+for serious use.
+
+=head1 AUTHOR
+
+Leon Brocard <acme@astray.com>
+
+=head1 LICENSE
+
+This module is free software; you can redistribute it or modify it under the same terms as Perl itself.
+
+=head1 SEE ALSO
+
+L<JSON::YAJL>
