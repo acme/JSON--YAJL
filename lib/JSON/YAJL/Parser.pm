@@ -16,7 +16,7 @@ JSON::YAJL::Parser - JSON parsing with YAJL
 
   use JSON::YAJL;
   my $text;
-  my $yajl_callbacks = JSON::YAJL::Parser->new(
+  my $parser = JSON::YAJL::Parser->new(
       0, 0,
       [   sub { $text .= "null\n" },
           sub { $text .= "bool: @_\n" },
@@ -33,8 +33,8 @@ JSON::YAJL::Parser - JSON parsing with YAJL
   );
   my $json
       = '{"integer":123,"double":4,"number":3.141,"string":"a string","string2":"another string","null":null,"true":true,"false":false,"map":{"key":"value","array":[1,2,3]}}';
-  $yajl_callbacks->parse($json);
-  $yajl_callbacks->parse_complete();
+  $parser->parse($json);
+  $parser->parse_complete();
   # $text is now:
   # map_open
   # map_key: integer
@@ -71,8 +71,52 @@ JSON::YAJL::Parser - JSON parsing with YAJL
 This module allows you to parse JSON with YAJL. This is quite a low-level
 interface for parsing JSON.
 
+You pass callbacks which are called whenever a small token of JSON is parsed.
+
 This is a very early release to see how cross-platform the underlying code is.
 The API may change in future.
+
+=head1 METHODS
+
+=head2 new
+
+The constructor. You pass in if JavaScript style comments will be allowed in
+the JSON input (both slash star and slash slash) and if invalid UTF8 strings
+should cause a parse error. You also pass in callbacks. The missing callbacks
+below are for integer and double - as there is no difference in Perl they are
+both sent through the number callback instead.
+
+  my $parser = JSON::YAJL::Parser->new(
+      0, 0,
+      [   sub { $text .= "null\n" },
+          sub { $text .= "bool: @_\n" },
+          undef,
+          undef,
+          sub { $text .= "number: @_\n" },
+          sub { $text .= "string: @_\n" },
+          sub { $text .= "map_open\n" },
+          sub { $text .= "map_key: @_\n" },
+          sub { $text .= "map_close\n" },
+          sub { $text .= "array_open\n" },
+          sub { $text .= "array_close\n" },
+      ]
+  );
+
+=head2 parse
+
+Parses some JSON. You can call this multiple times:
+
+  $parser->parse($json);
+
+=head2 parse_complete
+
+Parse any remaining buffered JSON. Since YAJL is a stream-based parser,
+without an explicit end of input, yajl sometimes can't decide if content
+at the end of the stream is valid or not. For example, if "1" has been
+fed in, yajl can't know whether another digit is next or some character
+that would terminate the integer token:
+
+  $parser->parse_complete();
 
 =head1 AUTHOR
 
