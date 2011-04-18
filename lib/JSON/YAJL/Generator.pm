@@ -1,7 +1,7 @@
 package JSON::YAJL::Generator;
 use strict;
 use warnings;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 require XSLoader;
 XSLoader::load( 'JSON::YAJL::Generator', $VERSION );
