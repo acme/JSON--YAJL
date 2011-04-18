@@ -7,7 +7,7 @@ use Test::Exception;
 use Test::More;
 
 my $text;
-my $yajl_callbacks = JSON::YAJL::Parser->new(
+my $parser_callbacks = JSON::YAJL::Parser->new(
     0, 0,
     [   sub { $text .= "null\n" },
         sub { $text .= "bool: @_\n" },
@@ -22,11 +22,11 @@ my $yajl_callbacks = JSON::YAJL::Parser->new(
         sub { $text .= "array_close\n" },
     ]
 );
-isa_ok( $yajl_callbacks, 'JSON::YAJL::Parser' );
+isa_ok( $parser_callbacks, 'JSON::YAJL::Parser' );
 my $json
     = '{"integer":123,"double":4,"number":3.141,"string":"a string","string2":"another string","null":null,"true":true,"false":false,"map":{"key":"value","array":[1,2,3]}}';
-$yajl_callbacks->parse($json);
-$yajl_callbacks->parse_complete();
+$parser_callbacks->parse($json);
+$parser_callbacks->parse_complete();
 is( $text, 'map_open
 map_key: integer
 number: 123
@@ -59,27 +59,27 @@ map_close
 '
 );
 
-my $yajl = JSON::YAJL::Parser->new( 0, 0, [] );
-isa_ok( $yajl, 'JSON::YAJL::Parser' );
-$yajl->parse($json);
-$yajl->parse_complete();
+my $parser = JSON::YAJL::Parser->new( 0, 0, [] );
+isa_ok( $parser, 'JSON::YAJL::Parser' );
+$parser->parse($json);
+$parser->parse_complete();
 
-my $yajl_empty = JSON::YAJL::Parser->new( 0, 0, [] );
-isa_ok( $yajl_empty, 'JSON::YAJL::Parser' );
-throws_ok { $yajl_empty->parse_complete() } qr/unknown error/;
+my $parser_empty = JSON::YAJL::Parser->new( 0, 0, [] );
+isa_ok( $parser_empty, 'JSON::YAJL::Parser' );
+throws_ok { $parser_empty->parse_complete() } qr/unknown error/;
 
-my $yajl_incomplete = JSON::YAJL::Parser->new( 0, 0, [] );
-isa_ok( $yajl_incomplete, 'JSON::YAJL::Parser' );
-$yajl_incomplete->parse('{"a": 3');
-throws_ok { $yajl_incomplete->parse_complete() } qr/unknown error/;
+my $parser_incomplete = JSON::YAJL::Parser->new( 0, 0, [] );
+isa_ok( $parser_incomplete, 'JSON::YAJL::Parser' );
+$parser_incomplete->parse('{"a": 3');
+throws_ok { $parser_incomplete->parse_complete() } qr/unknown error/;
 
-my $yajl_unallowed_token = JSON::YAJL::Parser->new( 0, 0, [] );
-isa_ok( $yajl_unallowed_token, 'JSON::YAJL::Parser' );
-throws_ok { $yajl_unallowed_token->parse('}') } qr/unallowed token/;
+my $parser_unallowed_token = JSON::YAJL::Parser->new( 0, 0, [] );
+isa_ok( $parser_unallowed_token, 'JSON::YAJL::Parser' );
+throws_ok { $parser_unallowed_token->parse('}') } qr/unallowed token/;
 
-my $yajl_invalid_object_key = JSON::YAJL::Parser->new( 0, 0, [] );
-isa_ok( $yajl_invalid_object_key, 'JSON::YAJL::Parser' );
-throws_ok { $yajl_invalid_object_key->parse('{ 3: 3}') }
+my $parser_invalid_object_key = JSON::YAJL::Parser->new( 0, 0, [] );
+isa_ok( $parser_invalid_object_key, 'JSON::YAJL::Parser' );
+throws_ok { $parser_invalid_object_key->parse('{ 3: 3}') }
 qr/invalid object key/;
 
 done_testing();
