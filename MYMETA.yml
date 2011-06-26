@@ -7,7 +7,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.36
 dynamic_config: 0
-generated_by: 'Module::Build version 0.3603'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -27,13 +27,6 @@ requires:
   Test::Exception: 0
   Test::More: 0
 resources:
-  bugtracker:
-    mailto: bug-JSON-YAJL@rt.cpan.org
-    web: http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-YAJL
   homepage: http://search.cpan.org/dist/JSON-YAJL/
   license: http://dev.perl.org/licenses/
-  repository:
-    type: git
-    url: https://github.com/acme/JSON--YAJL
-    web: git@github.com:acme/JSON--YAJL.git
 version: 0.07
