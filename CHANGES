@@ -1,6 +1,6 @@
 Revision history for Perl module JSON::YAJL:
 
-0.08
+0.08 Mon Jun 27 14:34:14 BST 2011
      - update to YAJL 2.0.3
 
 0.07 Mon Apr 18 20:09:36 CEST 2011
