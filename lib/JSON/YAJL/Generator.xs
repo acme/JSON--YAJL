@@ -33,9 +33,10 @@ MODULE = JSON::YAJL::Generator		PACKAGE = JSON::YAJL::Generator
 
 JSON::YAJL::Generator new(package, unsigned int beautify = 0, const char * indentString = "    ")
 CODE:
-    yajl_gen_config conf = { beautify, indentString };
     yajl_gen g;
-    g = yajl_gen_alloc(&conf, NULL);
+    g = yajl_gen_alloc(NULL);
+    yajl_gen_config(g, yajl_gen_beautify, beautify);
+    yajl_gen_config(g, yajl_gen_indent_string, indentString);
     RETVAL = g;
 OUTPUT:
     RETVAL
@@ -83,7 +84,7 @@ CODE:
 SV* get_buf(JSON::YAJL::Generator g)
 CODE:
     const unsigned char* buf;
-    unsigned int len;
+    size_t len;
     croak_on_status(yajl_gen_get_buf(g, &buf, &len));
     RETVAL = newSVpvn_utf8(buf, (STRLEN)len, 1);
 OUTPUT:

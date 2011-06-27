@@ -66,12 +66,12 @@ $parser->parse_complete();
 
 my $parser_empty = JSON::YAJL::Parser->new( 0, 0, [] );
 isa_ok( $parser_empty, 'JSON::YAJL::Parser' );
-throws_ok { $parser_empty->parse_complete() } qr/unknown error/;
+throws_ok { $parser_empty->parse_complete() } qr/premature EOF/;
 
 my $parser_incomplete = JSON::YAJL::Parser->new( 0, 0, [] );
 isa_ok( $parser_incomplete, 'JSON::YAJL::Parser' );
 $parser_incomplete->parse('{"a": 3');
-throws_ok { $parser_incomplete->parse_complete() } qr/unknown error/;
+throws_ok { $parser_incomplete->parse_complete() } qr/premature EOF/;
 
 my $parser_unallowed_token = JSON::YAJL::Parser->new( 0, 0, [] );
 isa_ok( $parser_unallowed_token, 'JSON::YAJL::Parser' );

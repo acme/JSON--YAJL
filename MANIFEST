@@ -39,5 +39,7 @@ yajl/yajl_lex.h
 yajl/yajl_parse.h
 yajl/yajl_parser.c
 yajl/yajl_parser.h
+yajl/yajl_tree.c
+yajl/yajl_tree.h
 yajl/yajl_version.c
 yajl/yajl_version.h
