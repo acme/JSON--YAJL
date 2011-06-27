@@ -55,7 +55,7 @@ CODE:
 
 void string(JSON::YAJL::Generator g, char * s, unsigned int length(s))
 CODE:
-    croak_on_status(yajl_gen_string(g, s, XSauto_length_of_s));
+    croak_on_status(yajl_gen_string(g, (unsigned char*)s, XSauto_length_of_s));
 
 void null(JSON::YAJL::Generator g)
 CODE:
@@ -86,7 +86,7 @@ CODE:
     const unsigned char* buf;
     size_t len;
     croak_on_status(yajl_gen_get_buf(g, &buf, &len));
-    RETVAL = newSVpvn_utf8(buf, (STRLEN)len, 1);
+    RETVAL = newSVpvn_utf8((char *)buf, (STRLEN)len, 1);
 OUTPUT:
     RETVAL
 

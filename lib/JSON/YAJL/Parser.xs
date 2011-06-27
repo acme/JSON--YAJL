@@ -128,7 +128,7 @@ static int callback_string(void * hashref, const unsigned char * s, size_t l) {
     ENTER;
     SAVETMPS;
     PUSHMARK(SP);
-    XPUSHs(sv_2mortal(newSVpv(s, l)));
+    XPUSHs(sv_2mortal(newSVpv((char *)s, l)));
     PUTBACK;
     callback_call((SV*) hashref, 5);
     return 1;
@@ -151,7 +151,7 @@ static int callback_map_key(void * hashref, const unsigned char * s, size_t l) {
     ENTER;
     SAVETMPS;
     PUSHMARK(SP);
-    XPUSHs(sv_2mortal(newSVpv(s, l)));
+    XPUSHs(sv_2mortal(newSVpv((char *)s, l)));
     PUTBACK;
     callback_call((SV*) hashref, 7);
     return 1;
@@ -211,7 +211,7 @@ CODE:
     yajl_handle parser;
     AV* array;
     HV *hash = newHV();
-    hv_stores(hash, "data", newSVpv("", 0));
+    (void)hv_stores(hash, "data", newSVpv("", 0));
     SvREFCNT_inc_void(arrayref);
     if (!SvROK(arrayref)) {
         printf("type is %i\n", SvTYPE(arrayref));
@@ -226,7 +226,7 @@ CODE:
     } else {
         DEBUG && printf("array is an PVAV\n");
     }
-    hv_stores(hash, "array", arrayref);
+    (void)hv_stores(hash, "array", arrayref);
     SV *hashref = newRV_noinc((SV*)hash);
     parser = yajl_alloc(&callbacks, NULL, (void *) hashref);
     yajl_config(parser, yajl_allow_comments, allowComments);
@@ -237,7 +237,7 @@ OUTPUT:
 
 void parse(JSON::YAJL::Parser parser, SV* data)
 CODE:
-    const unsigned char * jsonText;
+    const char * jsonText;
     unsigned int jsonTextLength;
     yajl_status status;
     unsigned char * error;
@@ -246,22 +246,22 @@ CODE:
     SV** dataref;
     jsonText = SvPV_nolen(data);
     jsonTextLength = SvCUR(data);
-    status = yajl_parse(parser, jsonText, jsonTextLength);
+    status = yajl_parse(parser, (unsigned char*)jsonText, jsonTextLength);
     if (status != yajl_status_ok) {
-        error = yajl_get_error(parser, 1, jsonText, jsonTextLength);
+        error = yajl_get_error(parser, 1, (unsigned char*)jsonText, jsonTextLength);
         Perl_croak(aTHX_ "%s", error);
         yajl_free_error(parser, error);
     } else {
         hashref = (SV*) parser->ctx;
         hash = (HV*) SvRV(hashref);
-        hv_stores(hash, "data", data);
+        (void)hv_stores(hash, "data", data);
     }
 
 void parse_complete(JSON::YAJL::Parser parser)
 CODE:
     yajl_status status;
     unsigned char * error;
-    const unsigned char * jsonText;
+    const char * jsonText;
     unsigned int jsonTextLength;
     SV* hashref;
     HV* hash;
@@ -275,7 +275,7 @@ CODE:
         data = (SV*) *dataref;
         jsonText = SvPV_nolen(data);
         jsonTextLength = SvCUR(data);
-        error = yajl_get_error(parser, 1, jsonText, jsonTextLength);
+        error = yajl_get_error(parser, 1, (unsigned char*)jsonText, jsonTextLength);
         Perl_croak(aTHX_ "%s", error);
         yajl_free_error(parser, error);
     }
