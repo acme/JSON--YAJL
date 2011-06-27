@@ -9,3 +9,4 @@ lib/JSON/YAJL/Generator.c
 lib/JSON/YAJL/Parser.c
 MANIFEST.SKIP
 MANIFEST.bak
+^MYMETA\.json$
