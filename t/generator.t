@@ -53,8 +53,8 @@ foreach my $i ( 1 .. 127 ) {
 }
 throws_ok { $generator_max_depth->map_open() } qr/Max depth exceeded/;
 
-# Only works in 5.8.8 and later (and not Windows)
-if ( $] > 5.008008 && $^O ne 'MSWin32' ) {
+# Only works in 5.8.8 and later (and not Windows or MirOS BSD)
+if ( $] > 5.008008 && $^O ne 'MSWin32' && $^O ne 'mirbsd' ) {
     my $generator_invalid_number = JSON::YAJL::Generator->new();
     $generator_invalid_number->map_open();
     $generator_invalid_number->string('number');
