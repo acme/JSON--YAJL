@@ -214,6 +214,14 @@ yajl_gen_integer(yajl_gen g, long long int number)
 #define isinf !_finite
 #endif
 
+/* Solaris doesn't have isinf? */
+#if defined (__SVR4) && defined (__sun)
+#ifndef isinf
+#include <ieeefp.h>
+#define isinf(x) (!finite((x)) && (x)==(x))
+#endif
+#endif
+
 yajl_gen_status
 yajl_gen_double(yajl_gen g, double number)
 {

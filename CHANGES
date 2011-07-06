@@ -2,6 +2,7 @@ Revision history for Perl module JSON::YAJL:
 
 0.09
      - don't test inf and nan under MirOS BSD
+     - work around not finding isinf under Solaris
 
 0.08 Mon Jun 27 14:34:14 BST 2011
      - update to YAJL 2.0.3
