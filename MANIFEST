@@ -43,3 +43,4 @@ yajl/yajl_tree.c
 yajl/yajl_tree.h
 yajl/yajl_version.c
 yajl/yajl_version.h
+META.json
