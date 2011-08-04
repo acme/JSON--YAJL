@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use JSON::YAJL::Generator;
 use JSON::YAJL::Parser;
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 1;
 
