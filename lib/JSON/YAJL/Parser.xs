@@ -23,6 +23,7 @@ void callback_call(SV* hashref, unsigned int index) {
     SV** callback_p;
     SV* callbackref;
     SV* callback;
+    dSP;
 
     if (!SvOK((SV*) hashref)) {
         Perl_croak(aTHX_ "YAJL: hashref is not defined");
@@ -80,7 +81,6 @@ void callback_call(SV* hashref, unsigned int index) {
     } else {
         DEBUG && printf("  callback is a PVCV\n");
     }
-    dSP;
     DEBUG && printf("  about to call callback\n");
     call_sv(callback, G_DISCARD);
     FREETMPS;
