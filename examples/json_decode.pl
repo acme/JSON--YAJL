@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use JSON::YAJL;
-use Marpa;
+use Marpa::XS;
 
 my $filename = shift || die 'Please pass a JSON filename to reformat';
 my @tokens = tokenize($filename);
@@ -149,7 +149,7 @@ json_decode.pl - Decode JSON as a Perl data structure
 =head1 DESCRIPTION
 
 This example program uses the parsing parts of L<JSON::YAJL> and a parser
-based on L<Marpa> to decode JSON as a Perl data structure. This is an example
+based on L<Marpa::XS> to decode JSON as a Perl data structure. This is an example
 of how a higher-level JSON parser could be build upon L<JSON::YAJL> and this
 is not recommended for serious use.
 

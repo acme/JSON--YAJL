@@ -1,5 +1,8 @@
 Revision history for Perl module JSON::YAJL:
 
+0.11
+     - move examples/json_decode.pl to Marpa::XS
+
 0.10 Thu Aug  4 08:37:47 BST 2011
      - work aroud the fact that win32 mingw/gcc doesn't have sprintf_s
      - move dSP to top of callback_call to compile under Microsoft Visual
